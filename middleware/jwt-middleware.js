@@ -5,17 +5,20 @@ module.exports = {
         jwt.verify(token, process.env.SECRET_KEY, function(err,decoded) {
             if(err) {
                 console.log('error')
+                res.set('token',null)
                 res.json({
-                    token: null
+                    message: null,
+                    status: null,
+                    data: null
                 });
             }
             else {
                 next();
             }
         })
+    },
+    jwtHeaders: function(req, res, next) {
+        res.set('token',req.get('token'))
+        next();
     }
-    // jwtHeaders: function(req, res, next) {
-    //     res.set('token',req.get('token'))
-    //     next();
-    // }
 }
