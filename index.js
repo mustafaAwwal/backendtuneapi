@@ -27,7 +27,7 @@ const db = require('./config/db.config');
  ************** Bootstrap App *************** 
  ******************************************************/
 
- var PORT = process.env.PORT || 5000;
+ var PORT = process.env.PORT || 1234;
 app.listen(PORT, () => {
     console.log('app is live at 1234');
 });

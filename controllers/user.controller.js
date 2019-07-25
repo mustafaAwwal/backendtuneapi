@@ -1,7 +1,7 @@
 
 const db = require('../config/db.config');
 const jwt = require('jsonwebtoken');
-
+const SECRET_KEY = require('../config/secretkey');
 module.exports.login = (req, res) => {
     
     const userData = {
@@ -13,7 +13,7 @@ module.exports.login = (req, res) => {
         {
             role: 'admin'
         },
-        process.env.SECRET_KEY,
+        SECRET_KEY.SECRET_KEY,
         {
             algorithm: 'HS256',
             expiresIn: 10000
