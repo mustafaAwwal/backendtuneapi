@@ -1,4 +1,5 @@
 const userController = require('../controllers/user.controller');
+const tokenController= require('../controllers/token.controller');
 const jwt = require('../middleware/jwt-middleware');
 
 module.exports = (app) => {
@@ -8,16 +9,19 @@ module.exports = (app) => {
     app.post('/signup', userController.signup);
     // app.use(jwt.jwtHandler);
     // app.use(jwt.jwtHeaders);
-    app.post('/createtoken', userController.createToken);
+    app.post('/createtoken', tokenController.createToken);
 
-    app.post('/listtoken', userController.listToken);
+    app.post('/listtoken', tokenController.listToken);
 
-    app.get('/getalltokens', userController.getAllTokens);
+    app.get('/getalltokens', tokenController.getAllTokens);
 
-    app.get('/getlisttokens', userController.getListTokens);
+    app.get('/getlisttokens', tokenController.getListTokens);
 
-    app.get('/gettokendata', userController.getTokenData);
+    app.get('/gettokendata', tokenController.getTokenData);
     
-    app.post('/inserttokendata', userController.insertToken);
+    app.post('/inserttokendata', tokenController.insertToken);
 
+    app.post('/removeToken', tokenController.removeLiveToken);
+
+    app.get('/getdeploytokens', tokenController.getDeployTokens);
 }
