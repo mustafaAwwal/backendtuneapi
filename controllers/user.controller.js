@@ -19,7 +19,7 @@ module.exports.login = (req, res) => {
             expiresIn: 10000
         }
     )
-    db.execute(`SELECT * FROM heroku_cd5497db7ba8561.users WHERE userPassword = "${userData.userpassword}" AND userId = "${userData.id}"` ).then((data) => {
+    db.execute(`SELECT * FROM heroku_cd5497db7ba8561.admin WHERE userPassword = "${userData.userpassword}" AND userId = "${userData.id}"` ).then((data) => {
         if(data[0].length > 0){
             res.send({
                 "message":'HURRAH', 
