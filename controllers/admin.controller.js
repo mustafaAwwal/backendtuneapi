@@ -1,7 +1,9 @@
-// Controller for Users
+
 const db = require('../config/db.config');
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = require('../config/secretkey');
+
+// Controllers For Admin
 
 module.exports.login = (req, res) => {
     
@@ -12,7 +14,7 @@ module.exports.login = (req, res) => {
     }
     token = jwt.sign(
         {
-            role: 'user'
+            role: 'admin'
         },
         SECRET_KEY.SECRET_KEY,
         {
@@ -20,7 +22,7 @@ module.exports.login = (req, res) => {
             expiresIn: 10000
         }
     )
-    db.execute(`SELECT * FROM heroku_cd5497db7ba8561.users WHERE userPassword = "${userData.userpassword}" AND userId = "${userData.id}"` ).then((data) => {
+    db.execute(`SELECT * FROM heroku_cd5497db7ba8561.admin WHERE userPassword = "${userData.userpassword}" AND userId = "${userData.id}"` ).then((data) => {
         if(data[0].length > 0){
             res.send({
                 "message":'HURRAH', 
@@ -50,7 +52,7 @@ module.exports.signup = (req, res) => {
         id: req.body.userId
     }
 
-    db.execute(`INSERT INTO heroku_cd5497db7ba8561.users (userName,userPassword,userEmail,userId) VALUES ("${userData.username}","${userData.userpassword}","${userData.useremail}","${userData.id}");` ).then((data) => {
+    db.execute(`INSERT INTO heroku_cd5497db7ba8561.admin (userName,userPassword,userEmail,userId) VALUES ("${userData.username}","${userData.userpassword}","${userData.useremail}","${userData.id}");` ).then((data) => {
         console.log(data);
         
         if(data){
@@ -69,3 +71,4 @@ module.exports.signup = (req, res) => {
         console.log(err);
     });
 }
+
