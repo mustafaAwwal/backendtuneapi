@@ -17,10 +17,10 @@ module.exports = (app) => {
     app.use(cors(corsOptions));
 
     // Pars application/JSON
-    app.use(bodyParser.json());
+    app.use(bodyParser.json({limit: '50mb'}));
 
     // Pars application/x-www-form-urlencoded
-    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
     // Setting Path to Route Folder
     var routPath = './routes/';
